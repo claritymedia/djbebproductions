@@ -173,15 +173,15 @@
   .news-row button{background:linear-gradient(180deg,#5FD8FF,#1B9DF0);border:none;border-radius:8px;color:#001018;padding:0 14px;cursor:pointer;font-weight:700}
   .copy{max-width:1100px;margin:34px auto 0;padding-top:18px;border-top:1px solid #121417;font-size:12px;color:#5A5F66;text-align:center}
 
-  #chatBtn{position:fixed;right:20px;bottom:22px;z-index:120;width:58px;height:58px;border-radius:50%;border:none;cursor:pointer;background:linear-gradient(180deg,#5FD8FF,#1B9DF0);color:#001018;font-size:24px;box-shadow:0 0 28px rgba(27,157,240,.55);animation:pulseGlow 2.6s infinite}
-  #chatPanel{position:fixed;right:20px;bottom:88px;z-index:120;width:320px;max-width:calc(100vw - 40px);height:380px;background:#0A0F14;border:1px solid #1B2A38;border-radius:16px;box-shadow:0 18px 60px rgba(0,0,0,.6),0 0 40px rgba(27,157,240,.18);display:none;flex-direction:column;overflow:hidden}
-  #chatPanel.open{display:flex}
-  #chatPanel .head{background:linear-gradient(180deg,#0A5FC4,#06121f);padding:16px;display:flex;align-items:center;justify-content:space-between}
-  #chatPanel .head .t{font-family:'Saira Condensed',sans-serif;font-style:italic;font-weight:700;color:#E8EBEE;font-size:18px}
-  #chatPanel .head .on{font-size:11px;color:#5FD8FF}
-  #chatPanel .body{flex:1;padding:16px;display:flex;flex-direction:column;gap:10px;justify-content:center;align-items:center;text-align:center}
-  #chatPanel .bubble{font-size:13px;color:#C8CCD0;background:#121417;border:1px solid #1B2A38;border-radius:12px;padding:12px 14px}
-  #chatPanel .foot{padding:12px;border-top:1px solid #121417}
+
+
+
+
+
+
+
+
+
 
   @media(max-width:860px){
     nav{padding:14px 18px}
@@ -423,19 +423,9 @@
     <div class="copy">&copy; 2026 DJ BEB Productions. All rights reserved.</div>
   </footer>
 
-  <!-- ============================ CHATBOT ============================ -->
-  <div id="chatPanel">
-    <div class="head">
-      <div><div class="t">DJ BEB Assistant</div><div class="on">&#x1F7E2; Online</div></div>
-      <button id="chatClose" style="background:transparent;border:none;color:#C8CCD0;font-size:20px;cursor:pointer">&times;</button>
-    </div>
-    <div class="body">
-      <div class="bubble">&#x1F44B; Hey! Ask about availability, pricing, or your event.</div>
-      <div style="font-family:monospace;font-size:11px;color:#5A5F66">&lt;!-- Chatbot widget embed goes here --&gt;</div>
-    </div>
-    <div class="foot"><input class="field" placeholder="Type a message&hellip;" style="width:100%" /></div>
-  </div>
-  <button id="chatBtn" aria-label="Chat">&#x1F4AC;</button>
+<!-- CHAT WIDGET -->
+<div data-chat-widget data-widget-id="6a3e06bba3d7dca4970ab50f" data-location-id="p50gznnYM1gruIj8X0CF"></div>
+<script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a3e06bba3d7dca4970ab50f"></script>
 
 <script>
 (function(){
@@ -666,12 +656,6 @@
 
   document.getElementById('hamburger').addEventListener('click', function(){
     document.getElementById('mobileMenu').classList.toggle('open');
-  });
-  document.getElementById('chatBtn').addEventListener('click', function(){
-    document.getElementById('chatPanel').classList.toggle('open');
-  });
-  document.getElementById('chatClose').addEventListener('click', function(){
-    document.getElementById('chatPanel').classList.remove('open');
   });
 
   onHash();
