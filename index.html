@@ -355,7 +355,7 @@
           <!-- ============ GHL BOOKING FORM ============ -->
           <!-- GHL Booking Form embed goes here. Field map: First Name->first_name | Last Name->last_name | Email->email | Phone->phone | Event Type->event_type | Event Date->event_date | Message->message -->
           <h3>Request a Quote</h3>
-          <form onsubmit="return false">
+          <form onsubmit="var f=this;var s=encodeURIComponent('New Quote Request from '+f.first_name.value+' '+f.last_name.value);var b=encodeURIComponent('Name: '+f.first_name.value+' '+f.last_name.value+String.fromCharCode(10)+'Email: '+f.email.value+String.fromCharCode(10)+'Phone: '+f.phone.value+String.fromCharCode(10)+'Event Type: '+f.event_type.value+String.fromCharCode(10)+'Event Date: '+f.event_date.value+String.fromCharCode(10)+String.fromCharCode(10)+'Message:'+String.fromCharCode(10)+f.message.value);window.location.href='mailto:djbeb@djbebproductions.com?subject='+s+'&body='+b;return false;">
             <div class="grid2">
               <input class="field" name="first_name" placeholder="First name" />
               <input class="field" name="last_name" placeholder="Last name" />
