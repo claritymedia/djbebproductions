@@ -425,24 +425,47 @@
 
 <!-- CHAT WIDGET -->
 <script>
-/* Chat widget: load 2 minutes after the page finishes loading so the hero CTA stays the focus */
+/* Chat bubble icon loads with the page; the greeting message is held back for 1 minute. */
 (function () {
-  var DELAY_MS = 120000; // 2 minutes
-  var started = false;
-  function loadChat() {
-    if (started) return;
-    started = true;
-    var s = document.createElement('script');
-    s.src = 'https://widgets.leadconnectorhq.com/loader.js';
-    s.setAttribute('data-resources-url', 'https://widgets.leadconnectorhq.com/chat-widget/loader.js');
-    s.setAttribute('data-widget-id', '6a3e1ec5a2835ae291c74f14');
-    document.body.appendChild(s);
+  var PROMPT_DELAY_MS = 60000; // 1 minute
+  var HIDE_CSS = '.lc_text-widget--prompt{display:none !important;}';
+  var revealed = false;
+  var origAttach = Element.prototype.attachShadow;
+  function shadow() {
+    var w = document.querySelector('chat-widget');
+    return w && w.shadowRoot ? w.shadowRoot : null;
   }
-  function start() { setTimeout(loadChat, DELAY_MS); }
+  function hide(root) {
+    if (revealed || !root) return;
+    if (root.querySelector('style[data-prompt-delay]')) return;
+    var st = document.createElement('style');
+    st.setAttribute('data-prompt-delay', '1');
+    st.textContent = HIDE_CSS;
+    root.appendChild(st);
+  }
+  Element.prototype.attachShadow = function (init) {
+    var r = origAttach.call(this, init);
+    try { if (this.tagName && this.tagName.toLowerCase() === 'chat-widget') { hide(r); } } catch (e) {}
+    return r;
+  };
+  var obs = new MutationObserver(function () { hide(shadow()); });
+  obs.observe(document.documentElement, { childList: true, subtree: true });
+  function reveal() {
+    revealed = true;
+    obs.disconnect();
+    Element.prototype.attachShadow = origAttach;
+    var r = shadow();
+    if (r) {
+      var olds = r.querySelectorAll('style[data-prompt-delay]');
+      for (var i = 0; i < olds.length; i++) { olds[i].remove(); }
+    }
+  }
+  function start() { setTimeout(reveal, PROMPT_DELAY_MS); }
   if (document.readyState === 'complete') { start(); }
   else { window.addEventListener('load', start, { once: true }); }
 })();
 </script>
+<script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a3e1ec5a2835ae291c74f14"></script>
 
 <script>
 (function(){
