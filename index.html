@@ -424,7 +424,25 @@
   </footer>
 
 <!-- CHAT WIDGET -->
-<script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a3e1ec5a2835ae291c74f14"></script>
+<script>
+/* Chat widget: load 2 minutes after the page finishes loading so the hero CTA stays the focus */
+(function () {
+  var DELAY_MS = 120000; // 2 minutes
+  var started = false;
+  function loadChat() {
+    if (started) return;
+    started = true;
+    var s = document.createElement('script');
+    s.src = 'https://widgets.leadconnectorhq.com/loader.js';
+    s.setAttribute('data-resources-url', 'https://widgets.leadconnectorhq.com/chat-widget/loader.js');
+    s.setAttribute('data-widget-id', '6a3e1ec5a2835ae291c74f14');
+    document.body.appendChild(s);
+  }
+  function start() { setTimeout(loadChat, DELAY_MS); }
+  if (document.readyState === 'complete') { start(); }
+  else { window.addEventListener('load', start, { once: true }); }
+})();
+</script>
 
 <script>
 (function(){
