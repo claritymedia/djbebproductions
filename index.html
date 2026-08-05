@@ -355,7 +355,7 @@
           <!-- ============ GHL BOOKING FORM ============ -->
           <!-- GHL Booking Form embed goes here. Field map: First Name->first_name | Last Name->last_name | Email->email | Phone->phone | Event Type->event_type | Event Date->event_date | Message->message -->
           <h3>Request a Quote</h3>
-          <form onsubmit="var f=this;var s=encodeURIComponent('New Quote Request from '+f.first_name.value+' '+f.last_name.value);var b=encodeURIComponent('Name: '+f.first_name.value+' '+f.last_name.value+String.fromCharCode(10)+'Email: '+f.email.value+String.fromCharCode(10)+'Phone: '+f.phone.value+String.fromCharCode(10)+'Event Type: '+f.event_type.value+String.fromCharCode(10)+'Event Date: '+f.event_date.value+String.fromCharCode(10)+String.fromCharCode(10)+'Message:'+String.fromCharCode(10)+f.message.value);window.location.href='mailto:djbeb@djbebproductions.com?subject='+s+'&body='+b;return false;">
+          <form onsubmit="var f=this;var s=encodeURIComponent('New Quote Request from '+f.first_name.value+' '+f.last_name.value);var b=encodeURIComponent('Name: '+f.first_name.value+' '+f.last_name.value+String.fromCharCode(10)+'Email: '+f.email.value+String.fromCharCode(10)+'Phone: '+f.phone.value+String.fromCharCode(10)+'Event Type: '+f.event_type.value+String.fromCharCode(10)+'Event Date: '+f.event_date.value+String.fromCharCode(10)+'Start Time: '+f.start_time.value+String.fromCharCode(10)+'End Time: '+f.end_time.value+String.fromCharCode(10)+String.fromCharCode(10)+'Message:'+String.fromCharCode(10)+f.message.value);window.location.href='mailto:djbeb@djbebproductions.com?subject='+s+'&body='+b;return false;">
             <div class="grid2">
               <input class="field" name="first_name" placeholder="First name" />
               <input class="field" name="last_name" placeholder="Last name" />
@@ -366,6 +366,10 @@
               <select class="field" name="event_type"><option>Wedding</option><option>Club / Party</option><option>Corporate</option><option>Production</option></select>
               <input class="field" name="event_date" type="date" />
             </div>
+            <div class="grid2" style="margin-top:14px">
+              <div><div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#5A5F66;margin-bottom:6px">Start time</div><input class="field" name="start_time" type="time" style="width:100%" /></div>
+              <div><div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#5A5F66;margin-bottom:6px">End time</div><input class="field" name="end_time" type="time" style="width:100%" /></div>
+            </div>
             <textarea class="field" name="message" placeholder="Tell us about your event&hellip;" rows="4" style="margin-top:14px;width:100%;resize:vertical"></textarea>
             <button class="btn-fill" type="submit" style="margin-top:18px;width:100%;font-size:17px;padding:15px 32px">Send Request &#9656;</button>
           </form>
@@ -373,10 +377,6 @@
         </div>
 
         <div class="reveal" style="display:flex;flex-direction:column;gap:24px">
-          <div class="cal-wrap">
-            <!-- GHL Calendar / Booking widget -->
-            <iframe src="https://api.leadconnectorhq.com/widget/booking/Hf6P001azenVmqHdIXCE" scrolling="no" id="Hf6P001azenVmqHdIXCE_1782341419778" title="Book DJ BEB"></iframe>
-          </div>
           <div class="card-panel">
             <div class="foot-h" style="margin-bottom:14px">Follow the sound</div>
             <div class="social-row">
