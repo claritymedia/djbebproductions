@@ -506,15 +506,16 @@
    {img:'https://www.djbebproductions.com/gallery-photo2.jpg'},
    {img:'https://assets.cdn.filesafe.space/DGQtullATQRfPaFbP0kV/media/6a3b7589817563b473c2a8d7.jpeg'},      {img:'https://www.djbebproductions.com/gallery-photo13.jpg'},   {img:'https://www.djbebproductions.com/gallery-photo14.jpg'},   
   ];
+  // Events auto-hide once past. Each entry needs end: the ISO date (YYYY-MM-DD) of its LAST day.
   var events = [
-    {day:'02', mon:'Aug', venue:'Wedding &mdash; Private', loc:'Dallas, TX'},
-    {day:'05', mon:'Aug', venue:'Birthday Party &mdash; Private', loc:'Frisco, TX'},
-    {day:'08', mon:'Aug', venue:'Wedding &mdash; Private', loc:'Princeton, TX'},
-    {day:'14&ndash;15', mon:'Aug', venue:'DFW Curling Club Bonspiel', loc:'Irving, TX'},
-    {day:'16', mon:'Aug', venue:'Private Party', loc:'Allen, TX'},
-    {day:'27', mon:'Aug', venue:'Commit2hiit Fitness Event', loc:'Irving, TX'},
-    {day:'28', mon:'Aug', venue:'Birthday Party &mdash; Private', loc:'Dallas, TX'},
-    {day:'04', mon:'Sep', venue:'Wedding &mdash; Private', loc:'Aubrey, TX'}
+    {end:'2026-08-02', day:'02', mon:'Aug', venue:'Wedding &mdash; Private', loc:'Dallas, TX'},
+    {end:'2026-08-05', day:'05', mon:'Aug', venue:'Birthday Party &mdash; Private', loc:'Frisco, TX'},
+    {end:'2026-08-08', day:'08', mon:'Aug', venue:'Wedding &mdash; Private', loc:'Princeton, TX'},
+    {end:'2026-08-15', day:'14&ndash;15', mon:'Aug', venue:'DFW Curling Club Bonspiel', loc:'Irving, TX'},
+    {end:'2026-08-16', day:'16', mon:'Aug', venue:'Private Party', loc:'Allen, TX'},
+    {end:'2026-08-27', day:'27', mon:'Aug', venue:'Commit2hiit Fitness Event', loc:'Irving, TX'},
+    {end:'2026-08-28', day:'28', mon:'Aug', venue:'Birthday Party &mdash; Private', loc:'Dallas, TX'},
+    {end:'2026-09-04', day:'04', mon:'Sep', venue:'Wedding &mdash; Private', loc:'Aubrey, TX'}
   ];
 
   var heroEq = document.getElementById('heroEq');
@@ -579,7 +580,18 @@
   });
 
   var evList = document.getElementById('evList');
-  events.forEach(function(ev){
+  var pad = function(n){ return (n < 10 ? '0' : '') + n; };
+  var now = new Date();
+  var today = now.getFullYear() + '-' + pad(now.getMonth() + 1) + '-' + pad(now.getDate());
+  var FAR = '9999-12-31';
+  var upcoming = events.filter(function(ev){ return !ev.end || ev.end >= today; }).sort(function(a, b){ return (a.end || FAR) < (b.end || FAR) ? -1 : 1; });
+  if (!upcoming.length){
+    var empty = document.createElement('div');
+    empty.className = 'ev reveal';
+    empty.innerHTML = '<div class="info"><div class="venue">More dates coming soon</div><div class="loc">New bookings are being confirmed &mdash; check back soon.</div></div>';
+    evList.appendChild(empty);
+  }
+  upcoming.forEach(function(ev){
     var row = document.createElement('div');
     row.className = 'ev reveal';
     row.innerHTML =
