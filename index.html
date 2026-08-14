@@ -645,6 +645,18 @@
     [].forEach.call(document.querySelectorAll('.v-frame'), function(f){ vidObs.observe(f); });
   }
 
+  function pauseOffscreenVideos(){
+    [].forEach.call(document.querySelectorAll('.v-frame'), function(f){
+      var vid = f.querySelector('video');
+      if (!vid || vid.paused) return;
+      var r = f.getBoundingClientRect();
+      if (r.height <= 0) { vid.pause(); return; }
+      var vis = Math.min(r.bottom, window.innerHeight) - Math.max(r.top, 0);
+      if (vis / r.height < 0.25) vid.pause();
+    });
+  }
+  window.addEventListener('scroll', pauseOffscreenVideos, {passive:true});
+
   audioCtrl = document.createElement('div');
   audioCtrl.id = 'audioCtrl';
   audioCtrl.innerHTML =
