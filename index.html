@@ -707,6 +707,9 @@
       a.classList.toggle('active', a.getAttribute('data-page') === name);
     });
     document.getElementById('mobileMenu').classList.remove('open');
+    if (name !== 'gallery'){
+      [].forEach.call(document.querySelectorAll('.v-frame video'), function(vd){ if (!vd.paused) vd.pause(); });
+    }
     atHero = true;
     if (name !== 'home' && heroAudio){ heroAudio.pause(); setAudioPlaying(false); }
     updateAudioCtrl();
